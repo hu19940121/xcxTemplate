@@ -32,8 +32,14 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           // get user info
-          await store.dispatch('user/getInfo')
-          next()
+          const userInfo = await store.dispatch('user/getInfo')
+          store.dispatch('GenerateRoutes', userInfo).then(() => { // 生成可访问的路由表
+            // console.log('store.getters.addRouters', store.getters.addRouters)
+            router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
+            next({ path: to.redirectedFrom }) // 先这样写 不知道为什么
+            // next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+          })
+          // next()
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

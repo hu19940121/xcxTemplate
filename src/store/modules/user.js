@@ -1,4 +1,4 @@
-import { login, logout, getInfo, getFormIds, xcxPush } from '@/api/user'
+import { login, logout, getInfo, getFormIds, xcxPush, getUserList, updateUser } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -6,7 +6,8 @@ const state = {
   token: getToken(),
   name: '',
   avatar: '',
-  formIds: []
+  formIds: [],
+  userList: []
 }
 
 const mutations = {
@@ -21,6 +22,9 @@ const mutations = {
   },
   SET_FORM_IDS: (state, formIds) => {
     state.formIds = formIds
+  },
+  SET_USER_LIST: (state, list) => {
+    state.userList = list
   }
 }
 
@@ -30,7 +34,6 @@ const actions = {
     console.log(' phone, password', phone, password)
     return new Promise((resolve, reject) => {
       login({ phone: phone.trim(), password: password }).then(response => {
-        console.log('response', response)
         const { data } = response
         commit('SET_TOKEN', data)
         setToken(data)
@@ -43,8 +46,6 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        console.log(response)
-
         const { data } = response
         if (!data) {
           reject('Verification failed, please Login again.')
@@ -63,6 +64,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
+        commit('SET_NAME', '')
         removeToken()
         resetRouter()
         resolve()
@@ -76,6 +78,27 @@ const actions = {
       getFormIds().then((res) => {
         commit('SET_FORM_IDS', res.data)
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  getUserList({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getUserList().then((res) => {
+        commit('SET_USER_LIST', res.data)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  updateUser({ commit, state }, data) {
+    return new Promise((resolve, reject) => {
+      updateUser(data).then((res) => {
+        // commit('SET_USER_LIST', res.data)
+        resolve(res)
       }).catch(error => {
         reject(error)
       })

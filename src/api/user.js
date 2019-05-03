@@ -58,3 +58,17 @@ export function xcxPush(data) {
     data
   })
 }
+export function getUserList() {
+  return request({
+    url: '/api/v1/user/list',
+    method: 'get'
+  })
+}
+export function updateUser(data) {
+  return request({
+    url: '/api/v1/user/update',
+    method: 'post',
+    data
+  })
+}
+

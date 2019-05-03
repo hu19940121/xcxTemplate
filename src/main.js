@@ -23,6 +23,14 @@ import '@/permission' // permission control
  * import { mockXHR } from '../mock'
  * mockXHR()
  */
+const dateformat = (dataStr) => {
+  return moment(dataStr).format('YYYY-MM-DD HH:mm:ss')
+}
+const deepCopy = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
+}
+Vue.prototype.$dateformat = dateformat
+Vue.prototype.$deepCopy = deepCopy
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
