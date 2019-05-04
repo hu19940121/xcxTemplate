@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import indexLayout from '@/indexLayout'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -43,14 +44,24 @@ export const constantRouterMap = [
     hidden: true
   },
   {
-    path: '/',
+    path: '/admin',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/admin/dashboard',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/',
+    component: indexLayout,
+    redirect: '/workList',
+    children: [{
+      path: '/workList',
+      name: 'WorkList',
+      component: () => import('@/views/workList/index')
     }]
   },
   // 404 page must be placed at the end !!!
