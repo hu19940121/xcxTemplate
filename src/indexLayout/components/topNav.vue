@@ -6,7 +6,7 @@
         <router-link to="/workList" active-class="active">
           <a class="nav-item">首页</a>
         </router-link>
-        <a class="nav-item">发现222</a>
+        <a class="nav-item">发现2222</a>
         <a class="nav-item">最新</a>
       </div>
       <div class="right">
