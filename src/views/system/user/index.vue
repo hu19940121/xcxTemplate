@@ -87,6 +87,9 @@ export default {
       choosedRoles: [] // 选中的角色
     }
   },
+  computed: {
+    ...mapGetters(['userList', 'roleList'])
+  },
   created() {
     this.getUserList().then(res => {
       this.getRoleList()
@@ -155,10 +158,8 @@ export default {
         return '暂无任何角色'
       }
     }
-  },
-  computed: {
-    ...mapGetters(['userList', 'roleList'])
   }
+
 }
 </script>
 

@@ -196,6 +196,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['formIds'])
+  },
   created() {
     // this.getFormIds()
     this.getFormIds()
@@ -230,9 +233,6 @@ export default {
         }
       })
     }
-  },
-  computed: {
-    ...mapGetters(['formIds'])
   }
 }
 </script>

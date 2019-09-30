@@ -6,6 +6,8 @@ import settings from './modules/settings'
 import user from './modules/user'
 import role from './modules/role'
 import access from './modules/access'
+import poetry from './modules/poetry'
+
 import permissionRouters from './modules/permissionRouters'
 
 Vue.use(Vuex)
@@ -17,6 +19,7 @@ const store = new Vuex.Store({
     user,
     role,
     access,
+    poetry,
     permissionRouters
   },
   getters

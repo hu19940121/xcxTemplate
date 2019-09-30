@@ -86,6 +86,22 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/poetry',
+    component: Layout,
+    redirect: '/poetry/list',
+    name: 'Poetry',
+    alwaysShow: true,
+    meta: { title: '诗词管理', icon: 'xcx' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/poetry/list'),
+        meta: { title: '诗词列表', icon: 'push' }
+      }
+    ]
+  },
+  {
     path: '/system',
     component: Layout,
     redirect: '/system/user',
