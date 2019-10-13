@@ -7,12 +7,18 @@
         <navbar />
       </div>
       <app-main />
+      <right-panel v-if="showSettings">
+        <settings />
+      </right-panel>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import RightPanel from '@/components/RightPanel'
+import { Navbar, Sidebar, AppMain, Settings } from './components'
+// import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
+
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -20,10 +26,15 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    Settings,
+    RightPanel
   },
   mixins: [ResizeMixin],
   computed: {
+    showSettings() {
+      return this.$store.state.settings.showSettings
+    },
     sidebar() {
       return this.$store.state.app.sidebar
     },
