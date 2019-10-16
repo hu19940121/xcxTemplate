@@ -7,6 +7,13 @@ export function getPoetryList(data) {
     method: 'get'
   })
 }
+export function addPoetry(data) {
+  return request({
+    url: '/api/v1/poetry/add',
+    data,
+    method: 'post'
+  })
+}
 
 // export function updateAccess(data) {
 //   return request({

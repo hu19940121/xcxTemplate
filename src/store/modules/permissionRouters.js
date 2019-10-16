@@ -32,7 +32,7 @@ const permissionRouters = {
         if (userInfo.is_super) { // 如果是最大权限者
           finalRouters = asyncRouterMap
         } else {
-          finalRouters = recursionRouter(userInfo.accessList, asyncRouterMap)
+          finalRouters = recursionRouter(userInfo.accessList, asyncRouterMap) // 根据权限列表去生城应有的路由
         }
         commit('SET_ROUTERS', finalRouters)
         resolve(finalRouters)

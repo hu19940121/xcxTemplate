@@ -56,6 +56,8 @@ service.interceptors.response.use(
     //     duration: 5 * 1000
     //   })
     if (res.code !== 0) {
+      console.log('res res.msg', res.msg)
+
       Message({
         message: res.msg || 'error',
         type: 'error',
@@ -74,7 +76,7 @@ service.interceptors.response.use(
           })
         })
       }
-      return Promise.reject(res.message || 'error')
+      return Promise.reject(res.msg || 'error')
     } else {
       return res
     }
