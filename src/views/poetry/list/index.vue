@@ -91,6 +91,7 @@ import { mapState, mapActions } from 'vuex'
 import poetryCard from '../components/poetryCard'
 import Pagination from '@/components/Pagination'
 export default {
+  name: 'PoetryList',
   components: {
     poetryCard,
     Pagination

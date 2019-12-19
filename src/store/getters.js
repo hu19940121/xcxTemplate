@@ -9,6 +9,8 @@ const getters = {
   roleList: state => state.role.roleList,
   accessList: state => state.access.accessList,
   routers: state => state.permissionRouters.routers,
-  addRouters: state => state.permissionRouters.addRouters
+  addRouters: state => state.permissionRouters.addRouters,
+  visitedViews: state => state.tagsView.visitedViews,
+  cachedViews: state => state.tagsView.cachedViews
 }
 export default getters

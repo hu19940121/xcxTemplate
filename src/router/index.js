@@ -95,9 +95,31 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'List',
+        name: 'PoetryList',
         component: () => import('@/views/poetry/list'),
         meta: { title: '诗词列表', icon: 'push' }
+      }
+    ]
+  },
+  {
+    path: '/answerQuestion',
+    component: Layout,
+    redirect: '/answerQuestion/bankList',
+    name: 'AnswerQuestion',
+    alwaysShow: true,
+    meta: { title: '答题管理', icon: 'xcx' },
+    children: [
+      {
+        path: 'bankList',
+        name: 'BankList',
+        component: () => import('@/views/answerQuestion/bankList'),
+        meta: { title: '题库列表', icon: 'push' }
+      },
+      {
+        path: 'questionList',
+        name: 'QuestionList',
+        component: () => import('@/views/answerQuestion/questionList'),
+        meta: { title: '题目列表', icon: 'push' }
       }
     ]
   },

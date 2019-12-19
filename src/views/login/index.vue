@@ -40,12 +40,12 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div class="tips">
         <!-- <span style="margin-right:20px;">phone: admin</span>
         <span> password: any</span> -->
+        <el-button type="primary" @click="githubAuth">github登录</el-button>
       </div>
 
     </el-form>
@@ -122,6 +122,13 @@ export default {
           return false
         }
       })
+    },
+    githubAuth() {
+      const clientRedirect = encodeURIComponent(`${location.origin}/xcxTemplate/#/admin`)
+      const redirect_uri = `${location.origin}/api/v1/github/auth?redirect_url=${clientRedirect}`
+      const client_id = 'd566ad3e567ce6e0bb79'
+      const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`
+      window.open(url)
     }
   }
 }
