@@ -46,6 +46,8 @@
         <!-- <span style="margin-right:20px;">phone: admin</span>
         <span> password: any</span> -->
         <el-button type="primary" @click="githubAuth">github登录</el-button>
+        <el-button type="primary" @click="qqAuth">qq登录</el-button>
+
       </div>
 
     </el-form>
@@ -128,6 +130,13 @@ export default {
       const redirect_uri = `${location.origin}/api/v1/github/auth?redirect_url=${clientRedirect}`
       const client_id = 'd566ad3e567ce6e0bb79'
       const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`
+      window.open(url)
+    },
+    qqAuth() {
+      const client_id = '101556796'
+      const clientRedirect = encodeURIComponent(`${location.origin}/xcxTemplate/#/admin`)
+      const redirect_uri = encodeURIComponent(`${location.origin}/api/v1/qq/auth?redirect_url=${clientRedirect}`)
+      const url = `https://graph.qq.com/oauth2.0/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&state=kkk`
       window.open(url)
     }
   }
