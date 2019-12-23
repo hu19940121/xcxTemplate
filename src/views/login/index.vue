@@ -46,7 +46,7 @@
         <!-- <span style="margin-right:20px;">phone: admin</span>
         <span> password: any</span> -->
         <el-button type="primary" @click="githubAuth">github登录</el-button>
-        <el-button type="primary" @click="qqAuth">qq登录</el-button>
+        <el-button type="primary" @click="qqAuth">qq1登录</el-button>
 
       </div>
 
@@ -135,7 +135,15 @@ export default {
     qqAuth() {
       const client_id = '101556796'
       const clientRedirect = encodeURIComponent(`${location.origin}/xcxTemplate/#/admin`)
-      const redirect_uri = encodeURIComponent(`${location.origin}/api/v1/qq/auth?redirect_url=${clientRedirect}`)
+      const accessRedUrl = `${location.origin}/api/v1/qq/auth`
+      // console.log('clientRedirect', clientRedirect)
+      // console.log('未加密之前', `${location.origin}/api/v1/qq/auth?redirect_url=${clientRedirect}`)
+
+      const redirect_uri = encodeURIComponent(`${location.origin}/api/v1/qq/auth?redirect_url=${clientRedirect}&accessRedUrl=${accessRedUrl}`)
+      // console.log('encode之后', redirect_uri)
+
+      // const redirect_uri = encodeURIComponent(`${location.origin}/api/v1/qq/auth`)
+
       const url = `https://graph.qq.com/oauth2.0/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&state=kkk`
       window.open(url)
     }
