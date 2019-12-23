@@ -1,62 +1,69 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
+    <div class="login-form">
       <div class="title-container">
         <h3 class="title">小程序模版推送平台</h3>
       </div>
-
-      <el-form-item prop="phone">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="phone"
-          v-model="loginForm.phone"
-          placeholder="请输入手机号"
-          name="phone"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
-
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="请输入密码"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
-      </el-form-item>
-
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="密码登录" name="password">
+          <el-form ref="loginForm" :model="loginForm" :rules="loginRules" auto-complete="on" label-position="left">
+            <el-form-item prop="phone">
+              <span class="svg-container">
+                <svg-icon icon-class="user" />
+              </span>
+              <el-input
+                ref="phone"
+                v-model="loginForm.phone"
+                placeholder="请输入手机号"
+                name="phone"
+                type="text"
+                tabindex="1"
+                auto-complete="on"
+              />
+            </el-form-item>
+            <el-form-item prop="password">
+              <span class="svg-container">
+                <svg-icon icon-class="password" />
+              </span>
+              <el-input
+                :key="passwordType"
+                ref="password"
+                v-model="loginForm.password"
+                :type="passwordType"
+                placeholder="请输入密码"
+                name="password"
+                tabindex="2"
+                auto-complete="on"
+                @keyup.enter.native="handleLogin"
+              />
+              <span class="show-pwd" @click="showPwd">
+                <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+              </span>
+            </el-form-item>
+            <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+          </el-form>
+        </el-tab-pane>
+        <el-tab-pane label="验证码登录" name="code">
+          <code-form />
+        </el-tab-pane>
+      </el-tabs>
 
       <div class="tips">
-        <!-- <span style="margin-right:20px;">phone: admin</span>
-        <span> password: any</span> -->
+        <el-button type="primary" @click="githubAuth">github登录</el-button>
+        <el-button type="primary" @click="qqAuth">qq登录</el-button>
       </div>
-
-    </el-form>
+    </div>
   </div>
 </template>
 
 <script>
 // import { validUsername } from '@/utils/validate'
-
+import codeForm from './codeForm'
 export default {
   name: 'Login',
+  components: {
+    codeForm
+  },
   data() {
     // const validateUsername = (rule, value, callback) => {
     //   if (!validUsername(value)) {
@@ -73,6 +80,8 @@ export default {
     //   }
     // }
     return {
+      activeName: 'password',
+
       loginForm: {
         phone: '',
         password: ''
@@ -80,8 +89,8 @@ export default {
       loginRules: {
         // phone: [{ required: true, trigger: 'blur', validator: validateUsername }],
         // password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-        phone: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur' }]
+        phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],
+        password: [{ required: true, message: '密码不能为空', trigger: 'blur' }]
       },
       loading: false,
       passwordType: 'password',
@@ -107,6 +116,9 @@ export default {
         this.$refs.password.focus()
       })
     },
+    handleClick() {
+
+    },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
@@ -122,6 +134,28 @@ export default {
           return false
         }
       })
+    },
+    githubAuth() {
+      const clientRedirect = encodeURIComponent(`${location.origin}/xcxTemplate/#/admin`)
+      const redirect_uri = `${location.origin}/api/v1/github/auth?redirect_url=${clientRedirect}`
+      const client_id = 'd566ad3e567ce6e0bb79'
+      const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`
+      window.open(url)
+    },
+    qqAuth() {
+      const client_id = '101556796'
+      const clientRedirect = encodeURIComponent(`${location.origin}/xcxTemplate/#/admin`)
+      const accessRedUrl = `${location.origin}/api/v1/qq/auth`
+      // console.log('clientRedirect', clientRedirect)
+      // console.log('未加密之前', `${location.origin}/api/v1/qq/auth?redirect_url=${clientRedirect}`)
+
+      const redirect_uri = encodeURIComponent(`${location.origin}/api/v1/qq/auth?redirect_url=${clientRedirect}&accessRedUrl=${accessRedUrl}`)
+      // console.log('encode之后', redirect_uri)
+
+      // const redirect_uri = encodeURIComponent(`${location.origin}/api/v1/qq/auth`)
+
+      const url = `https://graph.qq.com/oauth2.0/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&state=kkk`
+      window.open(url)
     }
   }
 }
@@ -147,7 +181,6 @@ $cursor: #fff;
     display: inline-block;
     height: 47px;
     width: 85%;
-
     input {
       background: transparent;
       border: 0px;
@@ -192,6 +225,13 @@ $light_gray:#eee;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+    /deep/ .el-tabs__item.is-active.is-top{
+      color:#1890ff
+    }
+    /deep/ .el-tabs__item.is-top{
+      color:  #ffffff
+
+    }
   }
 
   .tips {

@@ -95,9 +95,31 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'List',
+        name: 'PoetryList',
         component: () => import('@/views/poetry/list'),
         meta: { title: '诗词列表', icon: 'push' }
+      }
+    ]
+  },
+  {
+    path: '/answerQuestion',
+    component: Layout,
+    redirect: '/answerQuestion/bankList',
+    name: 'AnswerQuestion',
+    alwaysShow: true,
+    meta: { title: '答题管理', icon: 'xcx' },
+    children: [
+      {
+        path: 'bankList',
+        name: 'BankList',
+        component: () => import('@/views/answerQuestion/bankList'),
+        meta: { title: '题库列表', icon: 'push' }
+      },
+      {
+        path: 'questionList',
+        name: 'QuestionList',
+        component: () => import('@/views/answerQuestion/questionList'),
+        meta: { title: '题目列表', icon: 'push' }
       }
     ]
   },
@@ -114,24 +136,6 @@ export const asyncRouterMap = [
         name: 'User',
         component: () => import('@/views/system/user'),
         meta: { title: '用户管理', icon: 'yonghu' }
-        // children: [
-        //   {
-        //     path: 'userDetail',
-        //     name: 'UserDetail',
-        //     component: () => import('@/views/system/user/detail'),
-        //     meta: { title: '用户详情', icon: 'push' },
-        //     hidden: true,
-        //     children: [
-        //       {
-        //         path: 'test',
-        //         name: 'Test',
-        //         component: () => import('@/views/system/user/detail/t'),
-        //         meta: { title: 't', icon: 'push' },
-        //         hidden: true
-        //       }
-        //     ]
-        //   }
-        // ]
       },
       {
         path: 'role',

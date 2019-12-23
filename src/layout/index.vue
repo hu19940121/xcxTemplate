@@ -5,6 +5,8 @@
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
+        <tags-view v-if="needTagsView" />
+
       </div>
       <app-main />
       <right-panel v-if="showSettings">
@@ -16,7 +18,7 @@
 
 <script>
 import RightPanel from '@/components/RightPanel'
-import { Navbar, Sidebar, AppMain, Settings } from './components'
+import { Navbar, Sidebar, AppMain, Settings, TagsView } from './components'
 // import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
 
 import ResizeMixin from './mixin/ResizeHandler'
@@ -28,7 +30,8 @@ export default {
     Sidebar,
     AppMain,
     Settings,
-    RightPanel
+    RightPanel,
+    TagsView
   },
   mixins: [ResizeMixin],
   computed: {
@@ -43,6 +46,9 @@ export default {
     },
     fixedHeader() {
       return this.$store.state.settings.fixedHeader
+    },
+    needTagsView() {
+      return this.$store.state.settings.tagsView
     },
     classObj() {
       return {
