@@ -31,10 +31,10 @@ export default {
       // only show routes with meta.title
       let matched = this.$route.matched.filter(item => item.meta && item.meta.title)
       const first = matched[0]
-
-      if (!this.isDashboard(first)) {
-        matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
+      if (!this.isDashboard(first)) { // add '/admin/' to jump right dashboard
+        matched = [{ path: '/admin/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
       }
+      console.log(matched)
 
       this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
     },
@@ -48,10 +48,16 @@ export default {
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
       const { params } = this.$route
+      console.log('-------------', this.$route)
+
       var toPath = pathToRegexp.compile(path)
       return toPath(params)
     },
     handleLink(item) {
+      console.log('item', item)
+
+      console.log('handleLink')
+
       const { redirect, path } = item
       if (redirect) {
         this.$router.push(redirect)

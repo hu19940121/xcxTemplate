@@ -6,18 +6,26 @@
         <p class="some-info">{{ props.value.info }}</p>
       </div>
     </vue-waterfall-easy>
+    <modal v-model="visible" />
+    <div class="f">
+      {{ visible }}
+      <el-button @click="visible = true">打开</el-button>
+
+    </div>
   </div>
 </template>
 
 <script>
 import vueWaterfallEasy from 'vue-waterfall-easy'
-
+import modal from '@/components/modal'
 export default {
   components: {
-    vueWaterfallEasy
+    vueWaterfallEasy,
+    modal
   },
   data() {
     return {
+      visible: false,
       clientHeight: 0,
       imgsArr: [
         {
@@ -160,6 +168,10 @@ export default {
 
 <style lang="scss" scoped>
 .workList{
-
+  .f{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
 }
 </style>

@@ -67,6 +67,7 @@
         <el-button type="primary" @click="confirm('form')">确 定</el-button>
       </div>
     </el-dialog>
+    <router-view />
   </div>
 </template>
 
@@ -102,6 +103,9 @@ export default {
       getRoleList: 'role/getRoleList'
     }),
     openUserDialog(action, row) {
+      // this.$router.push({
+      //   path: '/system/user/userDetail?id=1'
+      // })
       this.UserDialogVisible = true
       if (action === 'update') {
         this.isUpdate = true

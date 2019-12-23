@@ -114,6 +114,24 @@ export const asyncRouterMap = [
         name: 'User',
         component: () => import('@/views/system/user'),
         meta: { title: '用户管理', icon: 'yonghu' }
+        // children: [
+        //   {
+        //     path: 'userDetail',
+        //     name: 'UserDetail',
+        //     component: () => import('@/views/system/user/detail'),
+        //     meta: { title: '用户详情', icon: 'push' },
+        //     hidden: true,
+        //     children: [
+        //       {
+        //         path: 'test',
+        //         name: 'Test',
+        //         component: () => import('@/views/system/user/detail/t'),
+        //         meta: { title: 't', icon: 'push' },
+        //         hidden: true
+        //       }
+        //     ]
+        //   }
+        // ]
       },
       {
         path: 'role',
