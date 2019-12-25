@@ -71,4 +71,11 @@ export function updateUser(data) {
     data
   })
 }
+export function codeLogin(data) {
+  return request({
+    url: '/api/v1/codeLogin',
+    method: 'post',
+    data
+  })
+}
 

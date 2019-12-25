@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login-form">
       <div class="title-container">
-        <h3 class="title">小程序模版推送平台</h3>
+        <h3 class="title">{{ $t('login.title') }}</h3>
       </div>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="密码登录" name="password">

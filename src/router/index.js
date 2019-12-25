@@ -51,7 +51,7 @@ export const constantRouterMap = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: 'dashboard', icon: 'dashboard' }
     }]
   },
   {
@@ -75,7 +75,7 @@ export const asyncRouterMap = [
     redirect: '/xcx/xcxPush',
     name: 'Xcx',
     alwaysShow: true,
-    meta: { title: '小程序', icon: 'xcx' },
+    meta: { title: 'miniProgram', icon: 'xcx' },
     children: [
       {
         path: 'xcxPush',

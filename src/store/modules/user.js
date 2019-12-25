@@ -1,4 +1,4 @@
-import { login, logout, getInfo, getFormIds, xcxPush, getUserList, updateUser } from '@/api/user'
+import { login, logout, getInfo, getFormIds, xcxPush, getUserList, updateUser, codeLogin } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -34,6 +34,20 @@ const actions = {
     console.log(' phone, password', phone, password)
     return new Promise((resolve, reject) => {
       login({ phone: phone.trim(), password: password }).then(response => {
+        const { data } = response
+        commit('SET_TOKEN', data)
+        setToken(data)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  codeLogin({ commit }, userInfo) {
+    const { phone, code } = userInfo
+    console.log(' phone, password', phone, code)
+    return new Promise((resolve, reject) => {
+      codeLogin({ phone: phone.trim(), code: code }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data)
         setToken(data)

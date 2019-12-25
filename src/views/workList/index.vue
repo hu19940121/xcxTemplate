@@ -8,8 +8,8 @@
     </vue-waterfall-easy>
     <modal v-model="visible" />
     <div class="f">
-      {{ visible }}
-      <el-button @click="visible = true">打开</el-button>
+      <!-- {{ visible }}
+      <el-button @click="visible = true">打开</el-button> -->
 
     </div>
   </div>

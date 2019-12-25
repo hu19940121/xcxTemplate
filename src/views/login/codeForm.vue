@@ -34,6 +34,7 @@
 
 <script>
 import codeTimer from '@/components/codeTimer'
+import { sendLoginCode } from '@/api/code'
 export default {
   components: {
     codeTimer
@@ -47,8 +48,8 @@ export default {
         code: ''
       },
       loginRules: {
-        phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],
-        code: [{ required: true, message: '验证码不能为空', trigger: 'blur' }]
+        phone: [{ required: true, message: '手机号不能为空', trigger: 'change' }],
+        code: [{ required: true, message: '验证码不能为空', trigger: 'change' }]
       }
     }
   },
@@ -68,11 +69,26 @@ export default {
         this.$message.warning('请输入正确手机号')
         return false
       }
-      this.codeStart = true
+      sendLoginCode({ phone: this.form.phone }).then(() => {
+        this.codeStart = true
+      })
     },
     checkPhone(phone) {
       const reg = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/
       return reg.test(phone)
+    },
+    handleLogin() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/codeLogin', this.form).then(() => {
+            this.$router.push({ path: this.redirect || '/admin' })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        }
+      })
     }
   }
 }
