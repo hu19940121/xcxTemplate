@@ -150,6 +150,22 @@ export const asyncRouterMap = [
         meta: { title: '权限管理', icon: 'quanxian' }
       }
     ]
+  },
+  {
+    path: '/music',
+    component: Layout,
+    redirect: '/music/list',
+    name: 'Music',
+    alwaysShow: true,
+    meta: { title: '音乐管理', icon: 'xitong' },
+    children: [
+      {
+        path: 'musicList',
+        name: 'MusicList',
+        component: () => import('@/views/music/list'),
+        meta: { title: '音乐列表', icon: 'yonghu' }
+      }
+    ]
   }
 ]
 const createRouter = () => new Router({
