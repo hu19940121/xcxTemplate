@@ -9,7 +9,7 @@
           prefix-icon="el-icon-search"
         />
         <el-button type="primary" @click="search">搜索</el-button>
-        <el-button style="float:right;" type="primary" @click="poetryFormVisible = true; test()">新增</el-button>
+        <el-button style="float:right;" type="primary" @click="poetryFormVisible = true;">新增</el-button>
       </div>
       <el-table
         v-loading="loading"
