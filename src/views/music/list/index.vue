@@ -9,7 +9,7 @@
           prefix-icon="el-icon-search"
         />
         <el-button type="primary" @click="search">搜索</el-button>
-        <el-button style="float:right;" type="primary" @click="musicFormVisible = true; test()">新增</el-button>
+        <el-button style="float:right;" type="primary" @click="musicFormVisible = true;resetMusicFrom()">新增</el-button>
       </div>
       <el-table
         v-loading="loading"
@@ -117,9 +117,7 @@ export default {
       musicForm: {
         artist: '',
         singer: '',
-        // src: 'https://resource.kaier001.com/New One Studio - 隐.mp3',
         src: '',
-
         pic: '',
         title: ''
       },
@@ -161,9 +159,6 @@ export default {
     }),
     listen(row) {
       window.open(row.src)
-    },
-    test() {
-      console.log('test')
     },
     getList() {
       this.getMusicList({ pageIndex: this.pageIndex, pageSize: this.pageSize, keywords: this.keywords })
@@ -234,6 +229,16 @@ export default {
     handleFormClose(formName) {
       this.isUpdate = false
       this.$refs[formName].resetFields()
+    },
+    resetMusicFrom() {
+      this.musicForm = {
+        id: null,
+        artist: '',
+        singer: '',
+        src: '',
+        pic: '',
+        title: ''
+      }
     }
   }
 
