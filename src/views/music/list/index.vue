@@ -215,6 +215,7 @@ export default {
         this.$message.info('请输入关键字')
         return false
       }
+      this.initPageInfo()
       this.getList()
     },
     handlePagination(val) {
