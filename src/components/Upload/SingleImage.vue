@@ -1,6 +1,7 @@
 <template>
   <div class="upload-container">
     <el-upload
+      v-bind="$attrs"
       :data="dataObj"
       :multiple="false"
       :show-file-list="false"

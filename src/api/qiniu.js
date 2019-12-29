@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function getQiniuToken() {
+export function getQiniuToken(data) {
   return request({
     url: '/api/v1/getQiniuToken',
-    method: 'get'
+    method: 'get',
+    params: data
   })
 }

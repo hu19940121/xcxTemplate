@@ -74,13 +74,13 @@
           <el-input v-model="musicForm.artist" />
         </el-form-item>
         <el-form-item label="歌曲url" prop="src" :label-width="formLabelWidth">
-          <uploadFile v-model="musicForm.src">上传mp3</uploadFile>
+          <uploadFile v-model="musicForm.src" accept=".mp3" bucket-name="dyhmusic">上传mp3</uploadFile>
         </el-form-item>
         <el-form-item label="歌手" prop="singer" :label-width="formLabelWidth">
           <el-input v-model="musicForm.singer" />
         </el-form-item>
         <el-form-item label="歌曲封面" prop="pic" :label-width="formLabelWidth">
-          <uploadImage v-model="musicForm.pic" />
+          <uploadImage v-model="musicForm.pic" accept=".jpg,.png" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
