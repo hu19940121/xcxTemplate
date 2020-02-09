@@ -27,6 +27,14 @@ import indexLayout from '@/indexLayout'
  */
 
 /**
+ * btnMap
+ * 需要设置权限的按钮
+ */
+export const btnMap = [
+  '/system/access/add',
+  '/system/access/del'
+]
+/**
  * constantRoutes
  * a base page that does not have permission requirements
  * all roles can be accessed
@@ -78,7 +86,8 @@ export const asyncRouterMap = [
     meta: { title: 'miniProgram', icon: 'xcx' },
     children: [
       {
-        path: 'xcxPush',
+        // path: 'xcxPush',
+        path: '/xcx/xcxPush',
         name: 'XcxPush',
         component: () => import('@/views/xcxPush/index'),
         meta: { title: '小程序推送', icon: 'push' }
@@ -94,7 +103,8 @@ export const asyncRouterMap = [
     meta: { title: '诗词管理', icon: 'xcx' },
     children: [
       {
-        path: 'list',
+        // path: 'list',
+        path: '/poetry/list',
         name: 'PoetryList',
         component: () => import('@/views/poetry/list'),
         meta: { title: '诗词列表', icon: 'push' }
@@ -110,7 +120,8 @@ export const asyncRouterMap = [
     meta: { title: '答题管理', icon: 'xcx' },
     children: [
       {
-        path: 'bankList',
+        // path: 'bankList',
+        path: '/answerQuestion/bankList',
         name: 'BankList',
         component: () => import('@/views/answerQuestion/bankList'),
         meta: { title: '题库列表', icon: 'push' }
@@ -132,19 +143,19 @@ export const asyncRouterMap = [
     meta: { title: '系统管理', icon: 'xitong' },
     children: [
       {
-        path: 'user',
+        path: '/system/user',
         name: 'User',
         component: () => import('@/views/system/user'),
         meta: { title: '用户管理', icon: 'yonghu' }
       },
       {
-        path: 'role',
+        path: '/system/row',
         name: 'Role',
         component: () => import('@/views/system/role'),
         meta: { title: '角色管理', icon: 'juese' }
       },
       {
-        path: 'access',
+        path: '/system/access',
         name: 'Access',
         component: () => import('@/views/system/access'),
         meta: { title: '权限管理', icon: 'quanxian' }
@@ -160,7 +171,7 @@ export const asyncRouterMap = [
     meta: { title: '音乐管理', icon: 'xitong' },
     children: [
       {
-        path: 'musicList',
+        path: '/music/list',
         name: 'MusicList',
         component: () => import('@/views/music/list'),
         meta: { title: '音乐列表', icon: 'yonghu' }

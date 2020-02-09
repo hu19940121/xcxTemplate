@@ -43,7 +43,7 @@
         <el-form-item label="角色权限" :label-width="formLabelWidth">
           <el-tree
             ref="tree"
-            check-strictly
+            :check-strictly="checkStrictly"
             :data="accessList"
             show-checkbox
             node-key="id"
@@ -65,6 +65,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      checkStrictly: false,
       defaultProps: {
         children: 'children',
         label: 'name'
@@ -106,7 +107,8 @@ export default {
       getRoleAccess: 'role/getRoleAccess'
     }),
     getCheckedKeys() {
-      this.chooesdAccess = this.$refs.tree.getCheckedKeys()
+      // this.chooesdAccess = this.$refs.tree.getCheckedKeys()
+      this.chooesdAccess = this.$refs.tree.getCheckedKeys().concat(this.$refs.tree.getHalfCheckedKeys())
     },
     confirmAdd(formName) {
       this.getCheckedKeys()
@@ -150,11 +152,16 @@ export default {
         this.form = {}
         this.isUpdate = false
       } else {
+        this.checkStrictly = true
         this.getRoleAccess({ id: row.id }).then(res => {
-          this.$refs.tree.setCheckedKeys(res.data.access_ids)
-          this.checkedKeys = res.data.access_ids
-          this.isUpdate = true
-          this.form = JSON.parse(JSON.stringify(row))
+          this.$nextTick(() => {
+            this.$refs.tree.setCheckedKeys(res.data.access_ids)
+            this.checkedKeys = res.data.access_ids
+            this.isUpdate = true
+            this.form = JSON.parse(JSON.stringify(row))
+            // set checked state of a node not affects its father and child nodes
+            this.checkStrictly = false
+          })
         })
       }
     },

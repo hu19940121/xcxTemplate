@@ -2,7 +2,7 @@
   <div class="access app-container">
     <el-card class="box-card">
       <div class="operation-btns">
-        <el-button type="primary" @click="openForm('add')">新增权限</el-button>
+        <el-button v-permission="'/system/access/add'" type="primary" @click="openForm('add')">新增权限</el-button>
       </div>
       <el-table
         :data="accessList"
@@ -19,12 +19,21 @@
           label="path"
         />
         <el-table-column
+          prop="type"
+          label="权限类型"
+        >
+          <template slot-scope="scope">
+            <span>{{ scope.row.type === 0 ? '菜单' :'按钮' }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="sort"
           label="排序"
         />
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="300px;">
           <template slot-scope="scope">
             <el-button
+              v-if="scope.row.type === 0"
               type="primary"
               size="mini"
               @click="openForm('addChild',scope.row)"
@@ -35,6 +44,7 @@
               @click="openForm('update',scope.row)"
             >编辑</el-button>
             <el-button
+              v-permission="'/system/access/del'"
               size="mini"
               type="danger"
               @click="del(scope.row.id)"
@@ -55,6 +65,12 @@
           <el-radio-group v-model="form.status">
             <el-radio :label="1">是</el-radio>
             <el-radio :label="0">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="权限类型" prop="type">
+          <el-radio-group v-model="form.type">
+            <el-radio :label="0">菜单</el-radio>
+            <el-radio :label="1">按钮</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="权限描述" prop="desc">
@@ -93,10 +109,11 @@ export default {
       },
       formTitle: '新增权限',
       form: {
+        type: 0, // 0 菜单 1 按钮
         name: '',
         path: '',
         desc: '',
-        status: 1,
+        status: 1, // 是否启用
         sort: 0
       },
       formVisible: false,
@@ -187,6 +204,7 @@ export default {
         this.currentRow = row
         this.isUpdate = false
         this.formTitle = '新增子权限'
+        this.form.path = `${row.path}/`
       } else if (action === 'add') {
         this.isUpdate = false
         this.formTitle = '新增权限'
@@ -216,7 +234,6 @@ export default {
 <style lang="scss" scoped>
 .access{
   .box-card{
-    width:80%;
     .operation-btns{
       padding:20px 0;
     }

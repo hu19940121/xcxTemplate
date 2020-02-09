@@ -16,6 +16,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import permission from './directive/permission/permission'
+Vue.directive('permission', permission) // 自定义按钮权限指令
 /**
  * If you don't want to use mock-server
  * you want to use mockjs for request interception

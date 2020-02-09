@@ -11,6 +11,8 @@ const getters = {
   routers: state => state.permissionRouters.routers,
   addRouters: state => state.permissionRouters.addRouters,
   visitedViews: state => state.tagsView.visitedViews,
-  cachedViews: state => state.tagsView.cachedViews
+  cachedViews: state => state.tagsView.cachedViews,
+  btnAccessList: state => state.permissionRouters.btnAccessList
+
 }
 export default getters
