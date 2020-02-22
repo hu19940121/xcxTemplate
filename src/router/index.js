@@ -66,11 +66,22 @@ export const constantRouterMap = [
     path: '/',
     component: indexLayout,
     redirect: '/workList',
-    children: [{
-      path: '/workList',
-      name: 'WorkList',
-      component: () => import('@/views/workList/index')
-    }]
+    children: [
+      {
+        path: '/workList',
+        name: 'WorkList',
+        component: () => import('@/views/workList/index')
+      },
+      {
+        path: '/livingList',
+        name: 'LivingList',
+        component: () => import('@/views/living/list')
+      }
+    ]
+  },
+  {
+    path: '/livingDetail',
+    component: () => import('@/views/living/detail')
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
@@ -175,6 +186,22 @@ export const asyncRouterMap = [
         name: 'MusicList',
         component: () => import('@/views/music/list'),
         meta: { title: '音乐列表', icon: 'yonghu' }
+      }
+    ]
+  },
+  {
+    path: '/live',
+    component: Layout,
+    redirect: '/live/room',
+    name: 'Live',
+    alwaysShow: true,
+    meta: { title: '直播管理', icon: 'xitong' },
+    children: [
+      {
+        path: '/live/room',
+        name: 'LiveList',
+        component: () => import('@/views/live/room'),
+        meta: { title: '直播间列表', icon: 'yonghu' }
       }
     ]
   }

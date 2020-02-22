@@ -12,7 +12,8 @@ const getters = {
   addRouters: state => state.permissionRouters.addRouters,
   visitedViews: state => state.tagsView.visitedViews,
   cachedViews: state => state.tagsView.cachedViews,
-  btnAccessList: state => state.permissionRouters.btnAccessList
+  btnAccessList: state => state.permissionRouters.btnAccessList,
+  roomList: state => state.room.roomList
 
 }
 export default getters
