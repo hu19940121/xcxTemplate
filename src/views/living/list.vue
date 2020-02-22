@@ -13,12 +13,13 @@ export default {
 
     }
   },
-  created() {
-    this.getRoomList()
-  },
   computed: {
     ...mapGetters(['roomList'])
   },
+  created() {
+    this.getRoomList()
+  },
+
   methods: {
     ...mapActions({
       getRoomList: 'room/getRoomList'
