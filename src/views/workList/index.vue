@@ -1,5 +1,11 @@
 <template>
   <div class="workList">
+    <p class="piaoyiti">
+      你好中国
+    </p>
+    <p class="UniTortred">
+      abcdefg
+    </p>
     <vue-waterfall-easy :imgs-arr="imgsArr" :height="clientHeight - 50" @scrollReachBottom="getData">
       <div slot-scope="props" class="img-info">
         <p class="some-info">第{{ props.index+1 }}张图片</p>
@@ -18,6 +24,7 @@
 <script>
 import vueWaterfallEasy from 'vue-waterfall-easy'
 import modal from '@/components/modal'
+import { createFont } from '@/api/font'
 export default {
   components: {
     vueWaterfallEasy,
@@ -153,12 +160,24 @@ export default {
   },
   mounted() {
     this.clientHeight = `${document.documentElement.clientHeight}` // document.body.clientWidth;
+    // this.handleCreateFont()
     // console.log(self.clientHeight);
     window.onresize = function temp() {
       this.clientHeight = `${document.documentElement.clientHeight}`
     }
   },
   methods: {
+    handleCreateFont() {
+      createFont({ font: 'piaoyiti', text: '你好中国' }).then((res) => {
+        let linkTag = ''
+        linkTag = document.createElement('link')
+        // linkTag.setAttribute('id', id)
+        linkTag.setAttribute('href', res.data.css)
+        linkTag.setAttribute('rel', 'stylesheet')
+        linkTag.setAttribute('type', 'text/css')
+        document.head.appendChild(linkTag)
+      })
+    },
     getData() {
       console.log('daodile~~~')
     }
@@ -168,6 +187,12 @@ export default {
 
 <style lang="scss" scoped>
 .workList{
+  .piaoyiti{
+    font-family: piaoyiti;
+  }
+  .UniTortred{
+    font-family: UniTortred;
+  }
   .f{
     position: fixed;
     top: 10px;

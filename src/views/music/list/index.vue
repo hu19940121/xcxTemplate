@@ -1,6 +1,7 @@
 <template>
   <div class="app-container list">
     <el-card class="box-card">
+      <p class="piaoyiti">啦啦啦啦啦</p>
       <div>
         <el-input
           v-model="keywords"
@@ -16,9 +17,14 @@
         :data="musicList"
       >
         <el-table-column
-          prop="title"
           label="歌曲名称"
-        />
+        >
+          <template slot-scope="prop">
+            <span class="piaoyiti">
+              {{ prop.row.title }}
+            </span>
+          </template>
+        </el-table-column>
         <el-table-column
           prop="artist"
           label="专辑"
@@ -97,6 +103,8 @@ import Pagination from '@/components/Pagination'
 import uploadImage from '@/components/Upload/SingleImage'
 import uploadFile from '@/components/Upload/uploadFile'
 import { delMusic } from '@/api/music'
+import { createFont } from '@/api/font'
+
 export default {
   name: 'MusicList',
   components: {
@@ -161,7 +169,10 @@ export default {
       window.open(row.src)
     },
     getList() {
-      this.getMusicList({ pageIndex: this.pageIndex, pageSize: this.pageSize, keywords: this.keywords })
+      this.getMusicList({ pageIndex: this.pageIndex, pageSize: this.pageSize, keywords: this.keywords }).then((data) => {
+        const text = data.list.map((item) => item.title).join('')
+        this.handleCreateFont(text)
+      })
     },
     add(formName) {
       this.$refs[formName].validate((valid) => {
@@ -240,6 +251,17 @@ export default {
         pic: '',
         title: ''
       }
+    },
+    handleCreateFont(text) {
+      createFont({ font: 'piaoyiti', text }).then((res) => {
+        let linkTag = ''
+        linkTag = document.createElement('link')
+        // linkTag.setAttribute('id', id)
+        linkTag.setAttribute('href', res.data.css)
+        linkTag.setAttribute('rel', 'stylesheet')
+        linkTag.setAttribute('type', 'text/css')
+        document.head.appendChild(linkTag)
+      })
     }
   }
 
@@ -247,5 +269,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.piaoyiti{
+  font-family: piaoyiti;
+}
 </style>

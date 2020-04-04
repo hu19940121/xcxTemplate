@@ -70,18 +70,23 @@ export const constantRouterMap = [
       {
         path: '/workList',
         name: 'WorkList',
+        hidden: true,
+
         component: () => import('@/views/workList/index')
       },
       {
         path: '/livingList',
         name: 'LivingList',
+        hidden: true,
+
         component: () => import('@/views/living/list')
       }
     ]
   },
   {
     path: '/livingDetail',
-    component: () => import('@/views/living/detail')
+    component: () => import('@/views/living/detail'),
+    hidden: true
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

@@ -25,7 +25,7 @@ const actions = {
         commit('SET_MUSIC_LOADING', false)
         commit('SET_MUSIC_LIST', res.data.list)
         commit('SET_MUSIC_LIST_TOTAL', res.data.total)
-        resolve()
+        resolve(res.data)
       }).catch(error => {
         reject(error)
       })
