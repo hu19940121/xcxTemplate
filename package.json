@@ -60,6 +60,9 @@
     "node": ">=8.9",
     "npm": ">= 3.0.0"
   },
+  "config": {
+    "unsafe-perm":true
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
