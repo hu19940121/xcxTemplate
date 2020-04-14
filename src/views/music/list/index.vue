@@ -253,6 +253,7 @@ export default {
       }
     },
     handleCreateFont(text) {
+      text = text || '啦啦啦啦啦'
       createFont({ font: 'piaoyiti', text }).then((res) => {
         let linkTag = ''
         linkTag = document.createElement('link')

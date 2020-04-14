@@ -93,23 +93,23 @@ export const constantRouterMap = [
 ]
 // 根据权限动态去匹配的路由
 export const asyncRouterMap = [
-  {
-    path: '/xcx',
-    component: Layout,
-    redirect: '/xcx/xcxPush',
-    name: 'Xcx',
-    alwaysShow: true,
-    meta: { title: 'miniProgram', icon: 'xcx' },
-    children: [
-      {
-        // path: 'xcxPush',
-        path: '/xcx/xcxPush',
-        name: 'XcxPush',
-        component: () => import('@/views/xcxPush/index'),
-        meta: { title: '小程序推送', icon: 'push' }
-      }
-    ]
-  },
+  // {
+  //   path: '/xcx',
+  //   component: Layout,
+  //   redirect: '/xcx/xcxPush',
+  //   name: 'Xcx',
+  //   alwaysShow: true,
+  //   meta: { title: 'miniProgram', icon: 'xcx' },
+  //   children: [
+  //     {
+  //       // path: 'xcxPush',
+  //       path: '/xcx/xcxPush',
+  //       name: 'XcxPush',
+  //       component: () => import('@/views/xcxPush/index'),
+  //       meta: { title: '小程序推送', icon: 'push' }
+  //     }
+  //   ]
+  // },
   {
     path: '/poetry',
     component: Layout,
@@ -127,29 +127,29 @@ export const asyncRouterMap = [
       }
     ]
   },
-  {
-    path: '/answerQuestion',
-    component: Layout,
-    redirect: '/answerQuestion/bankList',
-    name: 'AnswerQuestion',
-    alwaysShow: true,
-    meta: { title: '答题管理', icon: 'xcx' },
-    children: [
-      {
-        // path: 'bankList',
-        path: '/answerQuestion/bankList',
-        name: 'BankList',
-        component: () => import('@/views/answerQuestion/bankList'),
-        meta: { title: '题库列表', icon: 'push' }
-      },
-      {
-        path: 'questionList',
-        name: 'QuestionList',
-        component: () => import('@/views/answerQuestion/questionList'),
-        meta: { title: '题目列表', icon: 'push' }
-      }
-    ]
-  },
+  // {
+  //   path: '/answerQuestion',
+  //   component: Layout,
+  //   redirect: '/answerQuestion/bankList',
+  //   name: 'AnswerQuestion',
+  //   alwaysShow: true,
+  //   meta: { title: '答题管理', icon: 'xcx' },
+  //   children: [
+  //     {
+  //       // path: 'bankList',
+  //       path: '/answerQuestion/bankList',
+  //       name: 'BankList',
+  //       component: () => import('@/views/answerQuestion/bankList'),
+  //       meta: { title: '题库列表', icon: 'push' }
+  //     },
+  //     {
+  //       path: 'questionList',
+  //       name: 'QuestionList',
+  //       component: () => import('@/views/answerQuestion/questionList'),
+  //       meta: { title: '题目列表', icon: 'push' }
+  //     }
+  //   ]
+  // },
   {
     path: '/system',
     component: Layout,
@@ -193,23 +193,23 @@ export const asyncRouterMap = [
         meta: { title: '音乐列表', icon: 'yonghu' }
       }
     ]
-  },
-  {
-    path: '/live',
-    component: Layout,
-    redirect: '/live/room',
-    name: 'Live',
-    alwaysShow: true,
-    meta: { title: '直播管理', icon: 'xitong' },
-    children: [
-      {
-        path: '/live/room',
-        name: 'LiveList',
-        component: () => import('@/views/live/room'),
-        meta: { title: '直播间列表', icon: 'yonghu' }
-      }
-    ]
   }
+  // {
+  //   path: '/live',
+  //   component: Layout,
+  //   redirect: '/live/room',
+  //   name: 'Live',
+  //   alwaysShow: true,
+  //   meta: { title: '直播管理', icon: 'xitong' },
+  //   children: [
+  //     {
+  //       path: '/live/room',
+  //       name: 'LiveList',
+  //       component: () => import('@/views/live/room'),
+  //       meta: { title: '直播间列表', icon: 'yonghu' }
+  //     }
+  //   ]
+  // }
 ]
 const createRouter = () => new Router({
   // mode: 'history', // require service support
