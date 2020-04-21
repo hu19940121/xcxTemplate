@@ -128,6 +128,23 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/robot',
+    component: Layout,
+    redirect: '/robot/userList',
+    name: 'Robot',
+    alwaysShow: true,
+    meta: { title: '智能机器人', icon: 'xcx' },
+    children: [
+      {
+        // path: 'list',
+        path: '/robot/userList',
+        name: 'RobotUserList',
+        component: () => import('@/views/robot/userList'),
+        meta: { title: '用户列表', icon: 'push' }
+      }
+    ]
+  },
+  {
     path: '/answerQuestion',
     component: Layout,
     redirect: '/answerQuestion/bankList',
