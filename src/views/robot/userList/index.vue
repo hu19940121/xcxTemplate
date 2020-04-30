@@ -28,6 +28,26 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="推送次数"
+        >
+          <template slot-scope="prop">
+            <span v-if="prop.row.dingyueCount">
+              {{ prop.row.dingyueCount.count }}
+            </span>
+            <span v-else>无</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="推送设置"
+        >
+          <template slot-scope="prop">
+            <span v-if="prop.row.dingyueSetting">
+              {{ prop.row.dingyueSetting.checked ?'开' :'关' }}
+            </span>
+            <span v-else>无</span>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="province"
           label="省份"
         />
